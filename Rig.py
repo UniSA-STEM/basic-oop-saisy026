@@ -12,4 +12,33 @@ class Rig:
         self.damage = 0
         self.broken = False
         self.upgrade_level = 0
-        self.storage = []
+        self.storage = [DataSpike(), DataSpike(), RemovableDrive()]
+
+    def take_hit(self):
+        for item in self.storage:
+            if item.name == "DataSpike":
+                self.storage.remove(item)
+                if not self.broken:
+                    self.damage += 1
+                elif self.damage >= 2 and self.upgrade_level == 0:
+                    self.broken = True
+                    print(f"{self.name} is broken.")
+                else:
+                    print(f"{self.name} is already broken.")
+                return
+        print("No DataSpike found for hit.")
+
+    def repair(self):
+        for item in self.storage:
+            if item.name == "CryptoToken":
+                self.storage.remove(item)
+                if self.broken:
+                    self.damage = 0
+                    self.broken = False
+                    print(f"{self.name} has been repaired using a CryptoToken.")
+                else:
+                    print(f"{self.name} does not need repairs.")
+                return
+        print("No CryptoToken found for repair.")
+
+

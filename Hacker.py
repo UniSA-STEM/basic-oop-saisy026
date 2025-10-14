@@ -12,3 +12,13 @@ class Hacker:
         self.name = name
         self.trace_level = 0
         self.inventory = []
+        self.rig = None
+
+    def acquire_rig(self,rig):
+        for item in self.inventory:
+            if item.name == "CryptoToken":
+                self.inventory.remove(item)
+                self.rig = rig
+                print(f"{self.name} has acquired rig '{rig.name}'.")
+                return
+        print("No CryptoToken available to acquire rig.")
