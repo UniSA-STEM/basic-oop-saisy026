@@ -41,4 +41,11 @@ class Rig:
                 return
         print("No CryptoToken found for repair.")
 
-
+    def upgrade(self):
+        for item in self.storage:
+            if item.name == "Hardware Patch":
+                self.storage.remove(item)
+                self.upgrade_level += 1
+                print(f"{self.name} upgraded to Level {self.upgrade_level}.")
+                return
+        print("No Hardware Patch available to upgrade rig.")

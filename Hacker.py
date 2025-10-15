@@ -22,3 +22,4 @@ class Hacker:
                 print(f"{self.name} has acquired rig '{rig.name}'.")
                 return
         print("No CryptoToken available to acquire rig.")
+
