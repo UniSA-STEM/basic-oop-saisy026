@@ -16,7 +16,7 @@ class Rig:
 
     def take_hit(self):
         for item in self.storage:
-            if item.name == "DataSpike":
+            if item == "DataSpike":
                 self.storage.remove(item)
                 if not self.broken:
                     self.damage += 1
@@ -30,7 +30,7 @@ class Rig:
 
     def repair(self):
         for item in self.storage:
-            if item.name == "CryptoToken":
+            if item == "CryptoToken":
                 self.storage.remove(item)
                 if self.broken:
                     self.damage = 0

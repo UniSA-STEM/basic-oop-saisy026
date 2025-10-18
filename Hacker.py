@@ -11,12 +11,12 @@ class Hacker:
     def __init__(self,name):
         self.name = name
         self.trace_level = 0
-        self.inventory = []
+        self.inventory = ['CryptoToken']
         self.rig = None
 
     def acquire_rig(self,rig):
         for item in self.inventory:
-            if item.name == "CryptoToken":
+            if item == "CryptoToken":
                 self.inventory.remove(item)
                 self.rig = rig
                 print(f"{self.name} has acquired rig '{rig.name}'.")

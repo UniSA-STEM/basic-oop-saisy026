@@ -13,6 +13,15 @@ class Asset:
         self.description = description
         self.encrypted = False
 
+    def encrypt(self):
+        self.encrypted = True
+        print(f'Asset {self.name} is now encrypted.')
+
+    def decrypt(self):
+        self.encrypted = False
+        print(f'Asset {self.name} is now decrypted.')
+
+
     def __str__(self):
         if self.encrypted:
             return f"{self.name}: {self.description} [Encrypted]"
