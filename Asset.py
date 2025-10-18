@@ -21,7 +21,6 @@ class Asset:
         self.encrypted = False
         print(f'Asset {self.name} is now decrypted.')
 
-
     def __str__(self):
         if self.encrypted:
             return f"{self.name}: {self.description} [Encrypted]"
