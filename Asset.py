@@ -26,3 +26,26 @@ class Asset:
             return f"{self.name}: {self.description} [Encrypted]"
         else:
             return f"{self.name}: {self.description}"
+
+# The core assets include - CryptoToken, Data Spike, Removable Drive, Security Chip, Hardware Patch.
+
+class CryptoToken(Asset):
+    def _init_(self):
+        super()._init_("CryptoToken", "Used to acquire or repair rigs.")
+
+class DataSpike(Asset):
+    def _init_(self):
+        super()._init_("Data Spike", "Used in battles.")
+
+class RemovableDrive(Asset):
+    def _init_(self):
+        super()._init_("Removable Drive", "Found in rigs and used for extraction.")
+
+class SecurityChip(Asset):
+    def _init_(self):
+        super()._init_("Security Chip", "Used to encrypt or decrypt assets.")
+
+class HardwarePatch(Asset):
+    def _init_(self):
+        super()._init_("Hardware Patch", "Used to upgrade rigs.")
+
