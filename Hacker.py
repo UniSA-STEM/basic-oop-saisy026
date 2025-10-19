@@ -190,6 +190,14 @@ class Hacker:
                 return asset
         return None
 
+    def __str__(self):
+        inventory_str = ", ".join(str(asset) for asset in self.inventory)
+        if self.rig:
+            rig_name = self.rig.name
+        else:
+            'No Rig'
+        return f"Hacker: {self.name}, Rig: {self.rig}, Trace level: {self.trace_level}, Inventory: {inventory_str}"
+
 
 
 
