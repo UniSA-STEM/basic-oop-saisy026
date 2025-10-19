@@ -44,5 +44,61 @@ class Hacker:
         self.trace_level += 2
         print(f"Attack launched. Trace increased to {self.trace_level}.")
 
-    def
+# method to encrypt or decrypt an asset in inventory or rig storage.
+# Requires a Security Chip somewhere (inventory or rig storage).
+# action: 'encrypt' or 'decrypt'
+# location: 'inventory' or 'rig'
+
+    def change_asset_encryption(self, asset_name, action, location):
+        if action not in ('encrypt', 'decrypt'):
+            print("Invalid action. Use 'encrypt' or 'decrypt'.")
+            return False
+
+        # determine storage based on location
+        if location == 'inventory':
+            storage = self.inventory
+        elif location == 'rig' and self.rig:
+            storage = self.rig.storage
+        else:
+            print("Failed due to invalid location or no rig.")
+            return False
+
+        # check for security chip
+        chip_found = False
+        for i in self.inventory:
+            if i.name == 'Security Chip':
+                chip_found = True
+                break
+        if not chip_found and self.rig:
+            for j in self.rig.storage:
+                if j.name == 'Security Chip':
+                    chip_found = True
+                    break
+        if not chip_found:
+            print("Failed due to no Security Chip found.")
+            return False
+
+        # Find the asset
+        asset = None
+        for i in storage:
+            if i.name == asset_name:
+                asset = i
+                break
+        if not asset:
+            print(f"Failed: asset not found in {location}.")
+            return False
+
+        # Perform action
+        if action == 'encrypt':
+            asset.encrypt()
+            print(f"{asset.name} encrypted in {location}.")
+        else:  # decrypt
+            if not asset.encrypted:
+                print("Asset already decrypted.")
+            else:
+                asset.decrypt()
+                print(f"{asset.name} decrypted in {location}.")
+
+        return True
+
 
