@@ -21,19 +21,19 @@ class Rig:
 
     def take_hit(self):
         for item in self.storage:
-            if item == "CryptoToken":
+            if item.name == "Data Spike":
                 self.storage.remove(item)
                 self.damage += 1
                 print(f"{self.name} hit taken. Currently the damage is {self.damage}")
                 if self.damage >= 2 and self.upgrade_level == 0:
                     self.broken = True
                     print(f"{self.name} is broken")
-            return
+                return
         print("No DataSpike found for hit.")
 
     def repair(self):
         for item in self.storage:
-            if item == "CryptoToken":
+            if item.name == "CryptoToken":
                 self.storage.remove(item)
                 if self.broken:
                     self.damage = 0
@@ -46,7 +46,7 @@ class Rig:
 
     def upgrade(self):
         for item in self.storage:
-            if item == "Hardware Patch":
+            if item.name == "Hardware Patch":
                 self.storage.remove(item)
                 self.upgrade_level += 1
                 print(f"{self.name} upgraded to Level {self.upgrade_level}.")
@@ -78,7 +78,7 @@ class Rig:
     def release_asset(self, asset_name):
         for asset in self.storage:
             if asset.name == asset_name:
-                if asset.encrypt():
+                if asset.encrypted:
                     print(f"Asset {asset.name} cannot transfer and release because it is encrypted.")
                     return None
                 self.storage.remove(asset)
@@ -88,18 +88,18 @@ class Rig:
         return None
 
     def store_asset(self, asset):
-        if asset.encrypt():
+        if asset.encrypted:
             print(f"Asset {asset.name} cannot transfer and release because it is encrypted.")
             return False
         self.storage.append(asset)
-        return True
+        return None
 
 # condition method which return the rig’s conditon based on damage and upgrade level.
 
     def get_condition(self):
         if self.broken:
             status = "Broken"
-        elif self.damage >= 0:
+        elif self.damage > 0:
             status = "Damaged"
         else:
             status = "Pristine"
