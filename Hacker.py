@@ -6,14 +6,14 @@ ID: 110434667
 Username: saisy026
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
-from Asset import Asset, CryptoToken, DataSpike, RemovableDrive, SecurityChip, HardwarePatch
+from Asset import Asset
 from Rig import Rig
 
 class Hacker:
     def __init__(self,name):
         self.name = name
         self.trace_level = 0
-        self.inventory = ['CryptoToken']
+        self.inventory = [Asset("CryptoToken", "Used to acquire or repair rigs.")]
         self.rig = None
         self.threshold = 5
 
@@ -43,4 +43,6 @@ class Hacker:
         target_rig.take_hit()
         self.trace_level += 2
         print(f"Attack launched. Trace increased to {self.trace_level}.")
+
+    def
 
