@@ -89,4 +89,15 @@ class Rig:
         self.storage.append(asset)
         return True
 
+# condition method which return the rig’s conditon based on damage and upgrade level.
 
+    def get_condition(self):
+        if self.broken:
+            status = "Broken"
+        elif self.damage >= 0:
+            status = "Damaged"
+        else:
+            status = "Pristine"
+        return f"{status} (Level {self.upgrade_level})"
+
+# The string conversion method which print the rig’s name, conditon, upgrade level, and stored assets.
