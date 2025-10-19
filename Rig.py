@@ -16,6 +16,18 @@ class Rig:
         self.upgrade_level = 0
         self.storage = [DataSpike(), DataSpike(), RemovableDrive()]
 
+    def release_asset(self, asset_name):
+        for asset in self.storage:
+            if asset.name == asset_name:
+                if asset.encrypt():
+                    print(f"Asset {asset.name} cannot transfer and release because it is encrypted.")
+                    return None
+                self.storage.remove(asset)
+                return asset
+
+        print(f"Asset {asset_name} not found in storage.")
+        return None
+
     def take_hit(self):
         for item in self.storage:
             if item == "CryptoToken":
