@@ -18,22 +18,18 @@ class Rig:
 
     def take_hit(self):
         for item in self.storage:
-            if item == "DataSpike":
-                self.storage.remove(item)
-                if not self.broken:
-                    self.damage += 1
-                elif self.damage >= 2 and self.upgrade_level == 0:
+            if item == "CryptoToken":
+                self.damage += 1
+                print(f"{self.name} hit taken. Currently the damage is {self.damage}")
+                if self.damage >= 2 and self.upgrade_level == 0:
                     self.broken = True
-                    print(f"{self.name} is broken.")
-                else:
-                    print(f"{self.name} is already broken.")
-                return
+                    print(f"{self.name} is broken")
+            return
         print("No DataSpike found for hit.")
 
     def repair(self):
         for item in self.storage:
             if item == "CryptoToken":
-                self.storage.remove(item)
                 if self.broken:
                     self.damage = 0
                     self.broken = False
@@ -45,7 +41,7 @@ class Rig:
 
     def upgrade(self):
         for item in self.storage:
-            if item.name == "Hardware Patch":
+            if item == "Hardware Patch":
                 self.storage.remove(item)
                 self.upgrade_level += 1
                 print(f"{self.name} upgraded to Level {self.upgrade_level}.")
