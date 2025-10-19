@@ -181,6 +181,15 @@ class Hacker:
         print("Retrieve failed: asset not found in rig storage.")
         return False
 
+# method return and remove the first matching asset from inventory, or None if missing.
+
+    def scan_inventory(self, asset_name):
+        for asset in self.inventory:
+            if asset.name == asset_name:
+                self.inventory.remove(asset)
+                return asset
+        return None
+
 
 
 
