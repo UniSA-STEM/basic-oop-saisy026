@@ -19,7 +19,7 @@ class Hacker:
 
     def acquire_rig(self,rig):
         for i in self.inventory:
-            if i == 'CryptoToken':
+            if i.name == 'CryptoToken':
                 self.inventory.remove(i)
                 self.rig = rig
                 print(f"{self.name} has acquired rig '{rig.name}'.")
@@ -144,4 +144,44 @@ class Hacker:
 
         print("Failed to store: asset not found in inventory.")
         return False
+
+# method to move one or all non-encrypted assets from rig storage to inventory.
+
+    def retrieve_from_rig(self, asset_name=None):
+        if not self.rig:
+            print("Failed to retrieve: no rig available.")
+            return False
+
+        # Move all non-encrypted assets
+        if asset_name is None:
+            moved = 0
+            # Created a new list for remaining assets
+            remaining_assets = []
+            for asset in self.rig.storage:
+                if not asset.encrypted:
+                    self.inventory.append(asset)
+                    moved += 1
+                else:
+                    remaining_assets.append(asset)
+            self.rig.storage = remaining_assets
+            print(f"Retrieved {moved} assets from rig storage.")
+            return True
+
+        # Move one asset by name
+        for asset in self.rig.storage:
+            if asset.name == asset_name:
+                if asset.encrypted:
+                    print("Retrieve failed: asset is encrypted.")
+                    return False
+                self.inventory.append(asset)
+                self.rig.storage.remove(asset)
+                print(f"Retrieved {asset_name} from rig storage.")
+                return True
+
+        print("Retrieve failed: asset not found in rig storage.")
+        return False
+
+
+
+
 
