@@ -117,3 +117,31 @@ class Hacker:
         return False
 
 
+# method to move one or all assets from inventory to rig storage.
+
+    def store_to_rig(self, asset_name=None):
+        if not self.rig:
+            print("Failed to store: no rig available.")
+            return False
+
+        # Move all assets
+        if asset_name is None:
+            moved = len(self.inventory)
+            # Move each asset individually
+            for asset in list(self.inventory):
+                self.rig.storage.append(asset)
+                self.inventory.remove(asset)
+            print(f"Moved {moved} assets to rig storage.")
+            return True
+
+        # Move one asset
+        for asset in self.inventory:
+            if asset.name == asset_name:
+                self.rig.storage.append(asset)
+                self.inventory.remove(asset)
+                print(f"Moved {asset_name} to rig storage.")
+                return True
+
+        print("Failed to store: asset not found in inventory.")
+        return False
+
