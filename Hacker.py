@@ -18,9 +18,9 @@ class Hacker:
         self.threshold = 5
 
     def acquire_rig(self,rig):
-        for item in self.inventory:
-            if item == "CryptoToken":
-                self.inventory.remove(item)
+        for i in self.inventory:
+            if i == 'CryptoToken':
+                self.inventory.remove(i)
                 self.rig = rig
                 print(f"{self.name} has acquired rig '{rig.name}'.")
                 return
@@ -100,5 +100,20 @@ class Hacker:
                 print(f"{asset.name} decrypted in {location}.")
 
         return True
+
+    def upgrade_rig(self):
+        if not self.rig:
+            print("Unable to upgrade as no rig available.")
+            return False
+        # Search for a Hardware Patch in inventory
+        for asset in self.inventory:
+            if asset.name == 'Hardware Patch':
+                self.inventory.remove(asset)  # remove the patch
+                message = self.rig.upgrade()  # upgrade the rig
+                print(message)
+                return True
+
+        print("Unable to upgrade as no Hardware Patch found in inventory.")
+        return False
 
 
