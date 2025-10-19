@@ -197,8 +197,3 @@ class Hacker:
         else:
             'No Rig'
         return f"Hacker: {self.name}, Rig: {self.rig}, Trace level: {self.trace_level}, Inventory: {inventory_str}"
-
-
-
-
-
