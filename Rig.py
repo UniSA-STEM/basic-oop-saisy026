@@ -6,7 +6,7 @@ ID: 110434667
 Username: saisy026
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
-from Asset import Asset, CryptoToken, DataSpike, RemovableDrive, SecurityChip, HardwarePatch
+from Asset import Asset
 
 class Rig:
     def __init__(self, name):
@@ -14,11 +14,15 @@ class Rig:
         self.damage = 0
         self.broken = False
         self.upgrade_level = 0
-        self.storage = [DataSpike(), DataSpike(), RemovableDrive()]
+        self.storage = []
+        self.storage.append(Asset('Data Spike', 'Used in battles.'))
+        self.storage.append(Asset('Data Spike', 'Used in battles.'))
+        self.storage.append(Asset('Removable Drive', 'Found in rigs and used for extraction..'))
 
     def take_hit(self):
         for item in self.storage:
             if item == "CryptoToken":
+                self.storage.remove(item)
                 self.damage += 1
                 print(f"{self.name} hit taken. Currently the damage is {self.damage}")
                 if self.damage >= 2 and self.upgrade_level == 0:
@@ -30,6 +34,7 @@ class Rig:
     def repair(self):
         for item in self.storage:
             if item == "CryptoToken":
+                self.storage.remove(item)
                 if self.broken:
                     self.damage = 0
                     self.broken = False
@@ -101,3 +106,12 @@ class Rig:
         return f"{status} (Level {self.upgrade_level})"
 
 # The string conversion method which print the rig’s name, conditon, upgrade level, and stored assets.
+
+    def __str__(self):
+        stored_assets = ", ".join(str(asset) for asset in self.storage)
+        return f"{self.name}: {self.get_condition()}, Level: {self.upgrade_level}, Stored: {stored_assets}"
+
+
+
+
+
