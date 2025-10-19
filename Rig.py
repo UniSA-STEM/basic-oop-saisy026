@@ -15,7 +15,7 @@ class Rig:
         self.broken = False
         self.upgrade_level = 0
         self.storage = [DataSpike(), DataSpike(), RemovableDrive()]
-
+        self.generate_count = 0
 
     def take_hit(self):
         for item in self.storage:
@@ -48,6 +48,25 @@ class Rig:
                 print(f"{self.name} upgraded to Level {self.upgrade_level}.")
                 return
         print("No Hardware Patch available to upgrade rig.")
+
+
+# generate assets method. Rig has no control over what type of Asset is generated but generate 1 asset each time.
+
+    def generate_asset(self, asset_name):
+        asset_list = {
+        "CryptoToken": "Used to acquire or repair rigs.",
+        "Data Spike": "Used in battles.",
+        "Removable Drive": "Found in rigs and used for extraction.",
+        "Security Chip": "Used to encrypt or decrypt assets.",
+        "Hardware Patch": "Used to upgrade rigs.",
+    }
+        if asset_name not in asset_list:
+            print(f"Unknown asset type: {asset_name}")
+            return None
+
+        new_asset = Asset(asset_name, asset_list[asset_name])
+        self.storage.append(new_asset)
+        return new_asset
 
 
 # store and release methods
