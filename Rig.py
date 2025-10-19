@@ -15,7 +15,6 @@ class Rig:
         self.broken = False
         self.upgrade_level = 0
         self.storage = [DataSpike(), DataSpike(), RemovableDrive()]
-        self.generate_count = 0
 
     def take_hit(self):
         for item in self.storage:
